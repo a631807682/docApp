@@ -1,0 +1,34 @@
+<ion-view view-title="{{doctor.CustomerUser.Name}}大夫工作站" >
+    <ion-content>
+        <div class="index">
+            <div class="section-2">
+                <img ng-src="{{doctor.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+doctor.CustomerUser.Photo}}" class="img-responsive img-circle avatar" />
+                <div class="name">{{doctor.CustomerUser.Name}}</div>
+                <div class="hospital">{{doctor.Hospital.Name}}</div>
+                <div class="category">{{doctor.DiseaseCategory.Name}}科</div>
+            </div>
+            <div class="section-3">
+                <div class="tetris">
+                    <a class="back-color-green" ng-click="">
+                        <i class="ion-person-stalker"></i> 患者分组{{patientCount}}人
+                    </a>
+                </div>
+                <div class="tetris">
+                    <a class="back-color-blue" ng-click="">
+                        <i class="ion-pricetags"></i> 个人资料
+                    </a>
+                </div>
+                <div class="tetris">
+                    <a class="back-color-orange" ng-click="">
+                        <i class="ion-chatbubbles"></i> 医生资料
+                    </a>
+                </div>
+                <div class="tetris">
+                    <a class="back-color-yellow" ng-click="">
+                        <i class="ion-iphone"></i> 电话咨询
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

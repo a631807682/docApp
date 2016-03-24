@@ -1,0 +1,22 @@
+
+<ion-view view-title="出停诊" >
+    <ion-content>
+        <div class="table">
+            <div class="row">
+                <div class="col col-25"></div>
+                <div class="col col-25">上午</div>
+                <div class="col col-25">下午</div>
+                <div class="col col-25">夜间</div>
+            </div>
+            <div class="row" ng-repeat="item in params.scheduing.SchedulingItems">
+                <div class="col col-25">{{item.WeekN}}</div>
+                <div class="col col-25">{{item.SPlace}}</div>
+                <div class="col col-25">{{item.ZPlace}}</div>
+                <div class="col col-25">{{item.XPlace}}</div>
+            </div>
+            <div class="row padding">
+                <p>备注:{{params.scheduing.Scheduling.Tip}}</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

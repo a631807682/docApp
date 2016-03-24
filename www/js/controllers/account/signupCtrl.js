@@ -1,55 +1,66 @@
-var signupCtrl = function($scope, RegExpHelper, $ionicPopup) {
+var signupCtrl = function($scope, regExpHelper, tips, config, httpService, $location) {
 
     $scope.server = server = {};
     $scope.params = params = {};
     $scope.client = client = {};
-    var tools = $scope.tools;
 
 
-    server.sigup = function() {
+    params.user = '631807682@qq.com';
+    params.password = '123456';
+    params.confirmPassword = '123456';
 
 
+    /**
+     * 注册
+     * @param  {[type]} data [description]
+     * @return {[type]}      [description]
+     */
+    server.sigup = function(data) {
+        var url = config.accountApp + "/Account/Register/";
+        return httpService.post(url, data);
     }
+
 
 
     client.signup = function() {
 
-//**[验证
+
         if (angular.isUndefined(params.password) || params.password.length < 5) {
 
-            $ionicPopup.alert({
-                template: '请输入6位以上密码'
-            });
+            tips.show('请输入6位以上密码')
             return;
         }
 
         if (params.password != params.confirmPassword) {
 
-            $ionicPopup.alert({
-                template: '请填写一致的密码及确认密码'
-            });
+            tips.show('请填写一致的密码及确认密码')
             return;
         }
 
-        if ((!RegExpHelper.isMobile(params.user)) || (!RegExpHelper.isEm(params.user))) {
+        if ((!regExpHelper.isMobile(params.user)) && (!regExpHelper.isEmail(params.user))) {
 
-            $ionicPopup.alert({
-                template: '请填写正确的手机号码或邮箱'
-            });
-
+            tips.show('请填写正确的手机号码或邮箱')
             return;
         }
 
-//]
+
         var singupEntity = {
             telOrEmail: params.user,
             password: params.password,
             userType: params.userType
         };
-        server.sigup(singupEntity).then(function() {
+        server.sigup(singupEntity).then(function(response) {
+            var data = response.data;
 
+            if (data.Status == 0) {
 
+                var redUrl = "/signupConfirm/" + params.user;
+                $location.path(redUrl);
+            } else {
+                tips.show(data.ErrorMessage);
+            }
         });
+
 
     }
 
@@ -72,6 +83,8 @@ var signupCtrl = function($scope, RegExpHelper, $ionicPopup) {
     }
 
     client.Init();
+
+
 
 }
 

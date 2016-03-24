@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('docApp', ['ionic', 'controllers', 'services'])
+angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngCordova'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -25,17 +25,75 @@ angular.module('docApp', ['ionic', 'controllers', 'services'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
+    //doctor
     $stateProvider
 
-        .state('tab', {
-        url: '/tab',
+        .state('doc', {
+        url: '/doc',
         abstract: true,
-        templateUrl: 'views/share/tabs.html'
+        templateUrl: 'views/doctor/tabs.html'
+    }).state('doc.index', {
+        url: '/index',
+        views: {
+            'doc-index': {
+                templateUrl: 'views/doctor/index.html',
+                controller: 'doc.indexCtrl'
+            }
+        }
+    }).state('doc.visitStop', {
+        url: '/visitStop',
+        views: {
+            'doc-visitStop': {
+                templateUrl: 'views/doctor/visitStop.html',
+                controller: 'doc.visitStopCtrl'
+            }
+        }
+    }).state('doc.help', {
+        url: '/help',
+        views: {
+            'doc-help': {
+                templateUrl: 'views/doctor/help.html',
+                controller: 'doc.helpCtrl'
+            }
+        }
+    }).state('doc.member', {
+        url: '/member',
+        views: {
+            'doc-member': {
+                templateUrl: 'views/doctor/member.html',
+                controller: 'doc.memberCtrl'
+            }
+        }
+    }).state('doc.profile', {
+        url: '/member/profile',
+        views: {
+            'doc-member': {
+                templateUrl: 'views/doctor/profile.html',
+                controller: 'doc.profileCtrl'
+            }
+        }
+    }).state('doc.profile-avatar', {
+        url: '/member/profile/avatar',
+        params: { customer: {} },
+        views: {
+            'doc-member': {
+                templateUrl: 'views/doctor/profile/avatar.html',
+                controller: 'doc.profile.avatarCtrl'
+            }
+        }
+    }).state('doc.profile-name', {
+        url: '/member/profile/name',
+        params: { customer: {} },
+        views: {
+            'doc-member': {
+                templateUrl: 'views/doctor/profile/name.html',
+                controller: 'doc.profile.nameCtrl'
+            }
+        }
     });
+
+    
+
 
     $stateProvider
         .state('login', {
@@ -50,6 +108,14 @@ angular.module('docApp', ['ionic', 'controllers', 'services'])
             templateUrl: 'views/account/signup.html',
             controller: 'signupCtrl'
         });
+
+    $stateProvider
+        .state('signupConfirm', {
+            url: '/signupConfirm/:user',
+            templateUrl: 'views/account/signupConfirm.html',
+            controller: 'signupConfirmCtrl'
+        });
+
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');

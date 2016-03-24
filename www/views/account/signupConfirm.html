@@ -1,0 +1,20 @@
+<ion-view view-title="信息验证" cache-view="false">
+    <ion-content>
+        <div class="list list-inset">
+            <div class="item item-input">
+                <input type="text" ng-model="params.user" placeholder="手机/邮箱" readonly="true">
+            </div>
+            <div class="item item-input item-input-inset">
+                <input type="text" ng-model="params.code" placeholder="验证码">
+                <button class="button button-small button-positive" ng-if="codeEnable" ng-click="client.sendCode()">{{codeTips}}
+                </button>
+                <button class="button button-small button-dark" ng-if="!codeEnable">{{codeTips}}</button>
+            </div>
+        </div>
+        <div class="list padding">
+            <button class="button button-block button-positive" ng-click="client.verifyCode()">
+                确定
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
