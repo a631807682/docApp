@@ -1,0 +1,8 @@
+<ion-view view-title="医院" cache-view="false" hide-tabs>
+
+    <ion-content>
+
+            <ion-radio ng-repeat="hospital in hospitals" ng-model="params.doctor.HospitalId" ng-value="hospital.HospitalId" ng-click="client.save()" >{{hospital.Name}}</ion-radio>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,53 @@
+<ion-view view-title="预约详情" cache-view="false" hide-tabs>
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="client.save()">
+            保存
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list card">
+            <div class="item " ng-if="params.tel.TelAppointment.TelState=='完成'||params.tel.TelAppointment.TelState=='分配'">
+                <h2>订单号:{{params.tel.Order.Name}}</h2>
+                <p>咨询费用:{{params.tel.Order.Price}}</p>
+                <p>付款情况:{{params.tel.Order.OrderState}}</p>
+            </div>
+            <div class="item item-body">
+                <p>姓名: {{params.tel.TelAppointment.UserA.Name}}</p>
+                <p>
+                    性别:{{params.tel.TelAppointment.UserA.Gender}}
+                </p>
+                <p>
+                    年龄:{{params.tel.TelAppointment.UserA.Age}}
+                </p>
+                <p>
+                    所在地区:{{params.tel.TelAppointment.UserA.Province}}&nbsp;&nbsp; {{params.tel.tel.UserA.City}}
+                </p>
+                <p>
+                    手机号码:{{params.tel.TelAppointment.UserA.CellPhone}}
+                </p>
+                <p>
+                    疾病:{{params.tel.TelAppointment.Diesease}}
+                </p>
+                <p>
+                    疾病描述:{{params.tel.TelAppointment.Content}}
+                </p>
+                <p>预约时间:
+                    <span ion-datetime-picker ng-model="params.tel.TelAppointment.DetailTime">
+                        <input type="text" ng-if="(params.tel.TelAppointment.DetailTime|isDate)==false" data-ng-model="params.tel.TelAppointment.DetailTime" />
+                        <input type="text" ng-if="params.tel.TelAppointment.DetailTime|isDate" data-ng-model="params.tel.TelAppointment.DetailTime"  datetime="yyyy-MM-dd HH:mm:ss" />
+
+
+                    </span>
+                </p>
+                <p ng-if="params.tel.TelAppointment.TelState=='申请'">
+                    资讯价格:
+                    <input type="text" ng-model="params.apply.Price">
+                </p>
+            </div>
+        </div>
+        <!-- 
+    <div ion-datetime-picker ng-model="params.tel.TelAppointment.DetailTime">
+        {{params.tel.TelAppointment.DetailTime| date: "yyyy-mm-dd H:mm:ss"}}
+    </div> -->
+    </ion-content>
+</ion-view>

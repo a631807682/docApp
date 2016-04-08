@@ -9,6 +9,7 @@ angular.module('docApp').value('config', {
 
     docApp: "/docpage",
     accountApp: '/api',
-    customerApp: '/customerpage'
+    customerApp: '/customerpage',
+    chatApp: "/chatpage"
 
 });

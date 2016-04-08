@@ -3,5 +3,11 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.2.1"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "ion-datetime-picker": "^0.1.2",
+    "angular-datetime": "^2.2.1",
+    "checklist-model": "^0.9.0"
   }
 }

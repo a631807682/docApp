@@ -1,0 +1,16 @@
+<ion-view view-title="业务服务" cache-view="false" hide-tabs>
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="client.save()">
+            保存
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list>
+            <label ng-repeat="d in diseases">
+                <!--   <input type="checkbox" checklist-model="docDiseases" checklist-value="d"> {{d.Name}} -->
+                <ion-checkbox type="checkbox" checklist-model="docDiseases" checklist-value="d"> {{d.Name}}
+                </ion-checkbox>
+            </label>
+        </ion-list>
+    </ion-content>
+</ion-view>

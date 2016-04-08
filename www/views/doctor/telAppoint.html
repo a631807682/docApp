@@ -1,0 +1,21 @@
+<ion-view view-title="电话预约" cache-view="false" hide-tabs>
+    <ion-content>
+        <ul class="tab-menu tab-menu-3">
+            <li ng-click="client.show('申请')" ng-class="{'申请': 'active'}[type]">待执行</li>
+            <li ng-click="client.show('分配')" ng-class="{'分配': 'active'}[type]"> 待定时间</li>
+            <li ng-click="client.show('完成')" ng-class="{'完成': 'active'}[type]"> 已完成</li>
+        </ul>
+        <div class="list">
+            <a class="item" ng-repeat="tel in showTels" href="#/doc/member/telAppointDetail/{{tel.TelAppointment.TelAppointmentId}}" >
+                <div>{{tel.TelAppointment.UserA.Name}}</div>
+                <div>性别：{{tel.TelAppointment.UserA.Gender}} 年龄：{{tel.TelAppointment.UserA.Age}}</div>
+                <div>疾病：{{tel.TelAppointment.Diesease}}</div>
+                <div> 地区:{{tel.TelAppointment.UserA.Province}} {{tel.TelAppointment.UserA.City}}</div>
+                <div>
+                    描述:{{tel.TelAppointment.Content}}
+                </div>
+                <h4> 约定时间：{{tel.TelAppointment.DetailTime}}</h4>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

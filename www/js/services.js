@@ -122,6 +122,25 @@ angular.module('services', [])
 
 
         },
+        connect: function(url, params) {
+
+            var token = '';
+            var tokenInfo = storage.get(config.tokenKey);
+            if (tokenInfo && tokenInfo.access_token) {
+                token = tokenInfo.access_token;
+            }
+
+            var httpConfig = {
+                params: params,
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            };
+
+            return $http.get(config.host + url, httpConfig);
+
+        }
+
         // /**
         //  * 图片上传
         //  * @param  {[type]}   filePath [description]
@@ -168,4 +187,36 @@ angular.module('services', [])
             });
         }
     }
+})
+
+.factory('tempModal', function($ionicModal, $q) {
+
+    return {
+        text: function(scope, option) {
+            // var deferred = $q.defer();
+
+            // $ionicModal.fromTemplateUrl('views/doctor/templates/number.html', {
+            //     scope: scope,
+            //     animation: 'slide-in-up'
+            // }).then(function(modal) {
+
+            //     var tModel = modal;
+            //     //modal.call(tModel);
+
+
+
+
+            //     deferred.resolve(tModel);
+            // });
+
+
+            // return deferred.promise;
+
+        },
+        number: function() {
+
+        }
+    }
+
+
 });

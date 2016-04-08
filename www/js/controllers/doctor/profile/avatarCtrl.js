@@ -64,7 +64,7 @@ var avatarCtrl = function($scope, config, storage, httpService, $stateParams, $i
 
     client.init = function() {
 
-        //console.info('init', $stateParams.customer);
+        console.info('init', $stateParams.customer);
         params.customer = $stateParams.customer;
     }
 

@@ -1,3 +1,37 @@
+//基本设定
+
+//主色调
+$main-color:#2ab4d8;
+//主背景色
+$main-back-color:#fff;
+
+
+
+$high-light:#ecbf0a;
+
+$gray-light:#f0f0f0;
+$gray:#cccccc;
+$gray-dark:gray;
+
+$red:#ff0000;
+$blue:#2ab4d8;
+$orange:#e5785b;
+$green:#01c7b0;
+
+//文字设定
+$font-size:1.6rem;
+$font-family:'Microsoft YaHei','SimHei','Heiti SC';
+
+//链接设定
+$link-color:#000;
+$link-color-reverse:#fff;
+$link-hover-color:#666;
+
+//边框设定
+$border:solid 1px #ccc;
+
+
+//背景色
 .back-color-yellow {
     background-color: #ecbf0a;
 }
@@ -73,4 +107,118 @@
 
 .item-right-menu {
     
+}
+
+/**
+ * 聊天室
+ */
+
+.chat{
+    background-color:$gray;
+    position:relative;    
+    overflow-y:auto;
+    
+    .chat-header{
+        position:fixed;
+        z-index:999;
+        top:0;
+        width:100%;
+        left:0;
+    }
+    .chat-content{
+        margin-top:1rem;
+        margin-bottom:1rem;
+    }
+    .chat-footer{
+        position:fixed;
+        left:0;
+        bottom:0;
+        width:100%;
+        background-color:$gray-light;   
+        padding:1rem;
+        
+        button{
+            border:none;
+            background-color:$main-color;
+            color:#fff;
+        }
+        .input-group-addon{
+          padding: 0; 
+          font-weight: normal; 
+          line-height:none;
+          background-color:$main-color;
+          border:none;
+        }
+       .upfile-btn{
+          
+       }    
+    }
+    .chat-block{
+        margin:1rem 0;
+        .avatar{
+            
+        }
+        .time{
+            font-size:1rem;
+            color:$gray-light;
+            text-align:center;
+        }
+        .text{            
+            border-radius:20px;
+            padding:1rem;
+            background-color:#fff;
+            display:inline-block;
+            position:relative;
+            img{
+                width:95%;                
+            }
+            
+        }
+        .left .text{
+            margin-left:-9px;
+            margin-right:20px;
+            float:left;
+            &:before{
+                position:absolute;
+                top:15px;
+                left:-19px;
+                display:block;
+                content:"";
+                overflow:hidden;
+                width:10px;
+                height:10px;
+                border:solid 10px $gray;
+                border-right-color:#fff;                
+            }
+        }
+        .right .text{
+            margin-right:-9px;
+            margin-left:20px;
+            background-color:$main-color;
+            color:#fff;
+            float:right;
+            .name{
+                color:lighten($main-color,30%)
+            }
+            &:before{
+                position:absolute;
+                top:15px;
+                right:-19px;
+                display:block;
+                content:"";
+                overflow:hidden;
+                width:10px;
+                height:10px;
+                border:solid 10px $gray;
+                border-left-color:$main-color;                
+            }
+        }
+        .name{
+            font-size:1rem;
+            color:$gray;
+            &:after{
+                content:":";
+            }
+        }
+    }
 }

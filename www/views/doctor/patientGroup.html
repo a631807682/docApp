@@ -1,0 +1,10 @@
+<ion-view view-title="患者分组" cache-view="false" hide-tabs>
+    <ion-content>
+        <div class="list">
+            <a class="item" ng-repeat="group in params.patientGroups|orderBy:'PatientGroup.CreatedOn'" 
+            href="#/doc/index/patientGroupList/{{group.PatientGroup.PatientGroupId}}">
+                {{group.PatientGroup.Name}}({{group.Count}}人)
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

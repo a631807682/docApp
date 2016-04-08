@@ -1,0 +1,9 @@
+<ion-view view-title="科室" cache-view="false" hide-tabs>
+
+    <ion-content>
+
+            <ion-radio ng-repeat="cate in diseaseCates" ng-model="params.doctor.DiseaseCategoryId" ng-value="cate.DiseaseCategoryId" ng-click="client.save()" >{{cate.Name}}</ion-radio>
+
+
+    </ion-content>
+</ion-view>

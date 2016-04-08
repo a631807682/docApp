@@ -1,0 +1,23 @@
+<ion-view view-title="医生资料" cache-view="false" hide-tabs>
+    <ion-content>
+        <div class="list card">
+            <a href="javascript:void(0)" class="item" ng-click="client.go('doc.docProfile-title')">
+                <span class="title">职称</span>
+                <span>{{doctor.Title}}</span>
+            </a>
+            <a href="javascript:void(0)" class="item" ng-click="client.go('doc.docProfile-diseaseCate')">
+                <span class="title">科室</span>
+                <span>{{doctor.DiseaseCategory.Name}}</span>
+            </a>
+            <a href="javascript:void(0)" class="item" ng-click="client.go('doc.docProfile-hospital')">
+                <span class="title">医院</span>
+                <span>{{doctor.Hospital.Name}}</span>
+            </a>
+            <a href="javascript:void(0)" class="item item-text-wrap" ng-click="client.go('doc.docProfile-description')">
+                <span class="title">简介</span>
+                <p>{{doctor.Description}}</p>
+            </a>
+        </div>
+
+    </ion-content>
+</ion-view>

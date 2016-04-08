@@ -1,0 +1,28 @@
+<ion-view view-title="网络咨询" cache-view="false" hide-tabs>
+    <ion-content>
+        <ul class="tab-menu tab-menu-3">
+            <li ng-click="client.show('新')" ng-class="{'新': 'active'}[type]">新客户{{messages.newUser.length}}</li>
+            <li ng-click="client.show('未读')" ng-class="{'未读': 'active'}[type]"> 未读信息{{messages.newMsg.length}}</li>
+            <li ng-click="client.show('所有')" ng-class="{'所有': 'active'}[type]"> 所有信息</li>
+        </ul>
+        <div class="list">
+            <a class="item" ng-repeat="message in showMessage" href="#/doc/member/onlineChat/{{message.OnlineChat.OnlineChatId}}">
+                <div>
+                    <div>{{message.OnlineChat.UserA.Name}}</div>
+                    <div>{{message.NosawCount}}</div>
+                </div>
+                <div>性别：{{message.OnlineChat.UserA.Gender}} 年龄：{{message.OnlineChat.UserA.Age}}</div>
+                <div>疾病：{{message.OnlineChat.Name}}</div>
+                <div>
+                    <p ng-if="message.OnlineChatItem.ContentType=='通知'">
+                        最新动态：系统消息
+                    </p>
+                    <p ng-if="message.OnlineChatItem.ContentType!='通知'">
+                        最新动态：{{message.OnlineChatItem.Content|limitTo:30}}...
+                    </p>
+                </div>
+
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,4 +1,11 @@
 <ion-view view-title="个人资料" cache-view="false" hide-tabs>
+<!--     <ion-nav-buttons side="left">
+        <button class="button" ng-if="displayBack" ng-click="client.goBack()">
+              <i class="icon ion-ios-arrow-back"></i>
+            返回
+        </button>
+
+    </ion-nav-buttons> -->
     <ion-content>
         <div>
             <div class="list card">
@@ -10,17 +17,17 @@
                     <span class="title">名字</span>
                     <span>{{customer.Name}}</span>
                 </a>
-                <a href="javascript:void(0)" class="item">
+                <a href="javascript:void(0)" class="item" ng-click="client.go('doc.profile-province')">
                     <span class="title">地址</span>
                     <span>{{customer.Province}}{{customer.City}}</span>
                 </a>
             </div>
             <div class="list card">
-                <a href="javascript:void(0)" class="item">
+                <a href="javascript:void(0)" class="item" ng-click="client.genderList()">
                     <span class="title">性别</span>
                     <span>{{customer.Gender}}</span>
                 </a>
-                <a href="javascript:void(0)" class="item">
+                <a href="javascript:void(0)" class="item" ng-click="client.go('doc.profile-age')">
                     <span class="title">年龄</span>
                     <span>{{customer.Age}}</span>
                 </a>

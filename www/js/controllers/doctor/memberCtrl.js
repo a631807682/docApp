@@ -1,4 +1,4 @@
-var memberCtrl = function($scope, config, storage, httpService) {
+var memberCtrl = function($scope, config, storage, $state, $stateParams, httpService) {
 
     $scope.server = server = {};
     $scope.params = params = {};
@@ -30,8 +30,20 @@ var memberCtrl = function($scope, config, storage, httpService) {
 
     }
 
+    /*
+        跳转
+     */
+    client.ifRedirect = function(redirectTo) {
+        if (redirectTo) {
+            $state.go(redirectTo);
+        }
+
+    }
+
 
     client.init = function() {
+
+        client.ifRedirect($stateParams.redirectTo);
 
         var customer = storage.get(config.customerKey);
         params.doctorId = customer.CustomerUserId;

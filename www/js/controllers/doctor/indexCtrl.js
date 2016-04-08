@@ -1,4 +1,4 @@
-var indexCtrl = function($scope, config, storage, httpService) {
+var indexCtrl = function($scope, config, storage, httpService, $state, $location) {
 
 
     $scope.server = server = {};
@@ -32,7 +32,17 @@ var indexCtrl = function($scope, config, storage, httpService) {
     }
 
 
+    client.go = function(name) {
+        $state.go(name);
+    }
 
+    /*
+        tab子页跳转
+     */
+    client.redirect = function(name, redirectTo) {
+        $state.go(name, { redirectTo: redirectTo });
+
+    }
 
     client.init = function() {
 

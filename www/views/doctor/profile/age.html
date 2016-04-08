@@ -1,0 +1,8 @@
+<ion-view view-title="年龄" cache-view="false" hide-tabs>
+    <ion-nav-buttons side="right">
+    </ion-nav-buttons>
+    <ion-content scroll=true>
+  
+        <ion-radio ng-repeat="age in ages" ng-model="params.customer.Age" ng-value="age" ng-click="client.save()">{{age}}</ion-radio>
+    </ion-content>
+</ion-view>

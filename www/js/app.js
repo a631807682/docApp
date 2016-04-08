@@ -5,7 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngCordova'])
+angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngCordova',
+    'async', 'ion-datetime-picker', 'datetime', 'checklist-model'
+])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -27,20 +29,45 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
 
     //doctor
     $stateProvider
-
         .state('doc', {
-        url: '/doc',
-        abstract: true,
-        templateUrl: 'views/doctor/tabs.html'
-    }).state('doc.index', {
-        url: '/index',
-        views: {
-            'doc-index': {
-                templateUrl: 'views/doctor/index.html',
-                controller: 'doc.indexCtrl'
+            url: '/doc',
+            abstract: true,
+            templateUrl: 'views/doctor/tabs.html'
+        })
+
+    .state('doc.index', {
+            url: '/index',
+            views: {
+                'doc-index': {
+                    templateUrl: 'views/doctor/index.html',
+                    controller: 'doc.indexCtrl'
+                }
             }
-        }
-    }).state('doc.visitStop', {
+        })
+        .state('doc.patientGroup', {
+            url: '/index/patientGroup',
+            views: {
+                'doc-index': {
+                    templateUrl: 'views/doctor/patientGroup.html',
+                    controller: 'doc.patientGroupCtrl'
+                }
+            }
+        })
+        .state('doc.patientGroupList', {
+            url: '/index/patientGroupList/:groupId',
+            params: {
+                groupId: ''
+            },
+            views: {
+                'doc-index': {
+                    templateUrl: 'views/doctor/patientGroupList.html',
+                    controller: 'doc.patientGroupListCtrl'
+                }
+            }
+        })
+
+
+    .state('doc.visitStop', {
         url: '/visitStop',
         views: {
             'doc-visitStop': {
@@ -48,7 +75,9 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
                 controller: 'doc.visitStopCtrl'
             }
         }
-    }).state('doc.help', {
+    })
+
+    .state('doc.help', {
         url: '/help',
         views: {
             'doc-help': {
@@ -56,43 +85,180 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
                 controller: 'doc.helpCtrl'
             }
         }
-    }).state('doc.member', {
-        url: '/member',
+    })
+
+    .state('doc.member', {
+            url: '/member',
+            params: { redirectTo: null },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/member.html',
+                    controller: 'doc.memberCtrl'
+                }
+            }
+        }).state('doc.profile', {
+            url: '/member/profile',
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/profile.html',
+                    controller: 'doc.profileCtrl'
+                }
+            }
+        }).state('doc.profile-age', {
+            url: '/member/profile/age',
+            params: { customer: {} },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/profile/age.html',
+                    controller: 'doc.profile.ageCtrl'
+                }
+            }
+        }).state('doc.profile-avatar', {
+            url: '/member/profile/avatar',
+            params: { customer: {} },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/profile/avatar.html',
+                    controller: 'doc.profile.avatarCtrl'
+                }
+            }
+        }).state('doc.profile-province', {
+            url: '/member/profile/province',
+            params: { customer: {} },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/profile/province.html',
+                    controller: 'doc.profile.provinceCtrl'
+                }
+            }
+        }).state('doc.profile-city', {
+            url: '/member/profile/city',
+            params: {
+                customer: {}
+            },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/profile/city.html',
+                    controller: 'doc.profile.cityCtrl'
+                }
+            }
+        }).state('doc.profile-name', {
+            url: '/member/profile/name',
+            params: { customer: {} },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/profile/name.html',
+                    controller: 'doc.profile.nameCtrl'
+                }
+            }
+        })
+        .state('doc.docProfile', {
+            url: '/member/docProfile',
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/docProfile.html',
+                    controller: 'doc.docProfileCtrl'
+                }
+            }
+        }).state('doc.docProfile-title', {
+            url: '/member/docProfile/title',
+            params: { doctor: {} },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/docProfile/title.html',
+                    controller: 'doc.docProfile.titleCtrl'
+                }
+            }
+        }).state('doc.docProfile-hospital', {
+            url: '/member/docProfile/hospital',
+            params: { doctor: {} },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/docProfile/hospital.html',
+                    controller: 'doc.docProfile.hospitalCtrl'
+                }
+            }
+        }).state('doc.docProfile-diseaseCate', {
+            url: '/member/docProfile/diseaseCate',
+            params: { doctor: {} },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/docProfile/diseaseCate.html',
+                    controller: 'doc.docProfile.diseaseCateCtrl'
+                }
+            }
+        })
+        .state('doc.docProfile-description', {
+            url: '/member/docProfile/description',
+            params: { doctor: {} },
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/docProfile/description.html',
+                    controller: 'doc.docProfile.descriptionCtrl'
+                }
+            }
+        }).state('doc.businessRange', {
+            url: '/member/businessRange',
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/businessRange.html',
+                    controller: 'doc.businessRangeCtrl'
+                }
+            }
+        })
+        .state('doc.consultationRight', {
+            url: '/member/consultationRight',
+            views: {
+                'doc-member': {
+                    templateUrl: 'views/doctor/consultationRight.html',
+                    controller: 'doc.consultationRightCtrl'
+                }
+            }
+        })
+
+    .state('doc.telAppoint', {
+        url: '/member/telAppoint',
         views: {
             'doc-member': {
-                templateUrl: 'views/doctor/member.html',
-                controller: 'doc.memberCtrl'
+                templateUrl: 'views/doctor/telAppoint.html',
+                controller: 'doc.telAppointCtrl'
             }
         }
-    }).state('doc.profile', {
-        url: '/member/profile',
+    }).state('doc.telAppointDetail', {
+        url: '/member/telAppointDetail/:telId',
+        params: {
+            telId: ''
+        },
         views: {
             'doc-member': {
-                templateUrl: 'views/doctor/profile.html',
-                controller: 'doc.profileCtrl'
+                templateUrl: 'views/doctor/telAppointDetail.html',
+                controller: 'doc.telAppointDetailCtrl'
             }
         }
-    }).state('doc.profile-avatar', {
-        url: '/member/profile/avatar',
-        params: { customer: {} },
+    }).state('doc.onlineMessage', {
+        url: '/member/onlineMessage',
         views: {
             'doc-member': {
-                templateUrl: 'views/doctor/profile/avatar.html',
-                controller: 'doc.profile.avatarCtrl'
+                templateUrl: 'views/doctor/onlineMessage.html',
+                controller: 'doc.onlineMessageCtrl'
             }
         }
-    }).state('doc.profile-name', {
-        url: '/member/profile/name',
-        params: { customer: {} },
+    }).state('doc.onlineChat', {
+        url: '/member/onlineChat/:chatId',
+        params: {
+            chatId: ''
+        },
         views: {
             'doc-member': {
-                templateUrl: 'views/doctor/profile/name.html',
-                controller: 'doc.profile.nameCtrl'
+                templateUrl: 'views/share/onlineChat.html',
+                controller: 'share.onlineChatCtrl'
             }
         }
     });
 
-    
+
+
+
 
 
     $stateProvider

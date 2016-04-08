@@ -10,7 +10,7 @@ var nameCtrl = function($scope, config, storage, httpService, $stateParams, tips
         var url = config.docApp + '/CustomerUsers/UpdateCustomer/';
 
         var data = customer;
-        console.log(url, data);
+
         return httpService.post(url, data);
 
     }
@@ -26,7 +26,6 @@ var nameCtrl = function($scope, config, storage, httpService, $stateParams, tips
 
     client.init = function() {
 
-        console.info('init', $stateParams.customer);
         params.customer = $stateParams.customer;
     }
 

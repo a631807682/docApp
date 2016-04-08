@@ -1,0 +1,46 @@
+<ion-view view-title="分组详情" cache-view="false" hide-tabs>
+    <ion-content>
+        <div class="list card" ng-repeat="patient in patients">
+            <div class="item item-avatar" ng-click="client.openGroupModal(patient)">
+                <img ng-src="{{item.Patient.CustomerUser.Photo==null?'/img/noavatar.jpg':imgpath+item.Patient.CustomerUser.Photo}}">
+                <h2>{{patient.Patient.CustomerUser.Name}} </h2>
+                <p> {{patient.Patient.CustomerUser.Gender}} {{patient.Patient.CustomerUser.Age}}岁</p>
+                <p> {{patient.Patient.CustomerUser.Province}} {{patient.Patient.CustomerUser.City}}</p>
+            </div>
+            <a class="item" ng-repeat="case in patient.DiseaseCases" ng-click="client.openCaseModal(case)">
+                {{$index+1}}:{{case.Name}}
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
+<script id="case-modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar>
+            <button class="button" ng-click=" client.closeCaseModal()">返回</button>
+            <h1 class="title">{{modalCase.Name}}</h1>
+        </ion-header-bar>
+        <ion-content>
+            <div class="list card">
+                <div class="item" ng-bind-html="modalCase.Content">
+       
+                </div>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>
+
+<script id="group-modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar>
+            <button class="button" ng-click="client.closeGroupModal()">返回</button>
+            <h1 class="title">分组管理</h1>
+             <button class="button" ng-click="client.saveGroup()">保存</button>
+        </ion-header-bar>
+        <ion-content>
+            <label ng-repeat="g in doctorGroups">
+                <ion-checkbox type="checkbox" checklist-model="modalPatientGroup" checklist-value="g"> {{g.Name}}
+                </ion-checkbox>
+            </label>
+        </ion-content>
+    </ion-modal-view>
+</script>

@@ -1,0 +1,19 @@
+<ion-view view-title="收费标准" cache-view="false" hide-tabs>
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="client.save()">
+            保存
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">计费次数</span>
+                <input  type="number" ng-model="params.consultationRight.Time" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label" >收费金额</span>
+                <input type="text" ng-model="params.consultationRight.Price" >
+            </label>
+        </div>
+    </ion-content>
+</ion-view>
