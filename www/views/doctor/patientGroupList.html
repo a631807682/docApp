@@ -1,4 +1,6 @@
 <ion-view view-title="分组详情" cache-view="false" hide-tabs>
+
+
     <ion-content>
         <div class="list card" ng-repeat="patient in patients">
             <div class="item item-avatar" ng-click="client.openGroupModal(patient)">
@@ -12,35 +14,33 @@
             </a>
         </div>
     </ion-content>
-</ion-view>
-<script id="case-modal.html" type="text/ng-template">
-    <ion-modal-view>
-        <ion-header-bar>
-            <button class="button" ng-click=" client.closeCaseModal()">返回</button>
-            <h1 class="title">{{modalCase.Name}}</h1>
-        </ion-header-bar>
-        <ion-content>
-            <div class="list card">
-                <div class="item" ng-bind-html="modalCase.Content">
-       
+    <script id="case-modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar>
+                <button class="button" ng-click=" client.closeCaseModal()">返回</button>
+                <h1 class="title">{{modalCase.Name}}</h1>
+            </ion-header-bar>
+            <ion-content>
+                <div class="list card">
+                    <div class="item" ng-bind-html="modalCase.Content">
+                    </div>
                 </div>
-            </div>
-        </ion-content>
-    </ion-modal-view>
-</script>
-
-<script id="group-modal.html" type="text/ng-template">
-    <ion-modal-view>
-        <ion-header-bar>
-            <button class="button" ng-click="client.closeGroupModal()">返回</button>
-            <h1 class="title">分组管理</h1>
-             <button class="button" ng-click="client.saveGroup()">保存</button>
-        </ion-header-bar>
-        <ion-content>
-            <label ng-repeat="g in doctorGroups">
-                <ion-checkbox type="checkbox" checklist-model="modalPatientGroup" checklist-value="g"> {{g.Name}}
-                </ion-checkbox>
-            </label>
-        </ion-content>
-    </ion-modal-view>
-</script>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+    <script id="group-modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar>
+                <button class="button" ng-click="client.closeGroupModal()">返回</button>
+                <h1 class="title">分组管理</h1>
+                <button class="button" ng-click="client.saveGroup()">保存</button>
+            </ion-header-bar>
+            <ion-content>
+                <label ng-repeat="g in doctorGroups">
+                    <ion-checkbox type="checkbox" checklist-model="modalPatientGroup" checklist-value="g"> {{g.Name}}
+                    </ion-checkbox>
+                </label>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+</ion-view>

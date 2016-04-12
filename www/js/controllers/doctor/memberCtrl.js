@@ -1,4 +1,4 @@
-var memberCtrl = function($scope, config, storage, $state, $stateParams, httpService) {
+var memberCtrl = function($scope, config, storage, $state, $stateParams, httpService, $ionicPopup) {
 
     $scope.server = server = {};
     $scope.params = params = {};
@@ -30,6 +30,15 @@ var memberCtrl = function($scope, config, storage, $state, $stateParams, httpSer
 
     }
 
+    /**
+     * 登出
+     * @return {[type]} [description]
+     */
+    server.logout = function() {
+        var url = config.accountApp + "/Account/Logout/";
+        return httpService.get(url, {});
+    }
+
     /*
         跳转
      */
@@ -37,6 +46,30 @@ var memberCtrl = function($scope, config, storage, $state, $stateParams, httpSer
         if (redirectTo) {
             $state.go(redirectTo);
         }
+
+    }
+
+    /*
+        登出
+     */
+    client.logout = function() {
+
+        var myPopup = $ionicPopup.show({
+            subTitle: '确认登出账号',
+            scope: $scope,
+            buttons: [{
+                text: '取消'
+            }, {
+                text: '确定',
+                type: 'button-positive',
+                onTap: function(e) {
+                    server.logout();
+                    storage.remove(config.customerKey);
+                    $state.go('login');
+
+                }
+            }]
+        });
 
     }
 

@@ -25,7 +25,10 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
+    $httpProvider.interceptors.push('httpInterceptor'); //权限拦截
+    $httpProvider.defaults.useXDomain = true;
 
     //doctor
     $stateProvider

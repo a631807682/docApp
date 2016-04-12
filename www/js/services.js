@@ -29,8 +29,6 @@ angular.module('services', [])
 
 .factory('storage', function() {
 
-
-
     if (window.localStorage) {
 
         var storage = window.localStorage;
@@ -43,6 +41,9 @@ angular.module('services', [])
                 var data = JSON.stringify(val);
                 storage.setItem(key, data);
 
+            },
+            remove: function(key) {
+                storage.removeItem(key);
             }
 
         }
@@ -51,7 +52,42 @@ angular.module('services', [])
 
 })
 
-.factory('httpService', function($http, config, $ionicBackdrop, $ionicLoading, storage, $cordovaFileTransfer, $cordovaProgress) {
+.factory('httpInterceptor', function($q, $location, $injector) {
+
+    return {
+        responseError: function(response) {
+            var $ionicLoading = $injector.get('$ionicLoading');
+            var $ionicBackdrop = $injector.get('$ionicBackdrop');
+
+            $ionicBackdrop.release();
+            $ionicLoading.hide();
+
+            if (response.status === 401) { //无权限
+                // var $state = $injector.get('$state');
+                // $state.go('login');
+             
+             $ionicLoading.show({
+                    template: '请检测您的网络状况401' + JSON.stringify(response),
+                    noBackdrop: true,
+                    duration: 10 * 1000
+                });
+            } else {
+                // console.log('请检测您的网络状况')
+                $ionicLoading.show({
+                    template: '请检测您的网络状况' + JSON.stringify(response),
+                    noBackdrop: true,
+                    duration: 10 * 1000
+                });
+            }
+
+
+            return $q.reject(response);
+
+        }
+    }
+})
+
+.factory('httpService', function($http, config, $ionicBackdrop, $ionicLoading, storage, $cordovaFileTransfer, $cordovaProgress, $state, $q) {
 
     return {
         post: function(url, params) {
@@ -65,9 +101,10 @@ angular.module('services', [])
 
             var httpConfig = {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer' + token
                 }
             };
+
 
             $ionicBackdrop.retain();
             $ionicLoading.show({
@@ -80,12 +117,8 @@ angular.module('services', [])
                 $ionicBackdrop.release();
                 $ionicLoading.hide();
 
-            }).error(function(err) {
-
-                $ionicBackdrop.release();
-                $ionicLoading.hide();
             });
-
+            // return $http.post(config.host + url, params, httpConfig);
         },
         get: function(url, params) {
 
@@ -95,31 +128,29 @@ angular.module('services', [])
             if (tokenInfo && tokenInfo.access_token) {
                 token = tokenInfo.access_token;
             }
-
+            //Safari Authorization不可空格
             var httpConfig = {
                 params: params,
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    Authorization: 'Bearer' + token
                 }
             };
 
-            $ionicBackdrop.retain();
-            $ionicLoading.show({
-                template: "<ion-spinner icon='ios' class='spinner spinner-ios '></ion-spinner>",
-                noBackdrop: true
-            });
+            // $ionicBackdrop.retain();
+            // $ionicLoading.show({
+            //     template: "<ion-spinner icon='ios' class='spinner spinner-ios '></ion-spinner>",
+            //     noBackdrop: true
+            // });
 
-            return $http.get(config.host + url, httpConfig).success(function() {
+            // return $http.get(config.host + url, httpConfig).success(function() {
 
-                $ionicBackdrop.release();
-                $ionicLoading.hide();
+            //     $ionicBackdrop.release();
+            //     $ionicLoading.hide();
 
-            }).error(function(err) {
-
-                $ionicBackdrop.release();
-                $ionicLoading.hide();
-            });
-
+            // });
+            var deferred = $q.defer();
+            $http.get(config.host + url, httpConfig).then(deferred.resolve, deferred.reject);
+            return deferred.promise;
 
         },
         connect: function(url, params) {
@@ -187,36 +218,4 @@ angular.module('services', [])
             });
         }
     }
-})
-
-.factory('tempModal', function($ionicModal, $q) {
-
-    return {
-        text: function(scope, option) {
-            // var deferred = $q.defer();
-
-            // $ionicModal.fromTemplateUrl('views/doctor/templates/number.html', {
-            //     scope: scope,
-            //     animation: 'slide-in-up'
-            // }).then(function(modal) {
-
-            //     var tModel = modal;
-            //     //modal.call(tModel);
-
-
-
-
-            //     deferred.resolve(tModel);
-            // });
-
-
-            // return deferred.promise;
-
-        },
-        number: function() {
-
-        }
-    }
-
-
 });

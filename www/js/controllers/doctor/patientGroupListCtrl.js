@@ -59,7 +59,7 @@ var patientGroupListCtrl = function($scope, config, storage, httpService, $state
     }
 
     /*
-    	打开分组弹出层
+        打开分组弹出层
      */
     client.openGroupModal = function(patient) {
 
@@ -78,14 +78,14 @@ var patientGroupListCtrl = function($scope, config, storage, httpService, $state
     }
 
     /*
-    	关闭分组弹出层
+        关闭分组弹出层
      */
     client.closeGroupModal = function() {
         $scope.groupModal.hide();
     }
 
     /*
-    	保存分组
+        保存分组
      */
     client.saveGroup = function() {
         var groups = $scope.modalPatientGroup;
@@ -101,17 +101,14 @@ var patientGroupListCtrl = function($scope, config, storage, httpService, $state
 
             $scope.groupModal.hide();
             $state.go('doc.patientGroup');
-            // //获取分组患者列表
-            // server.getPatients(params.groupId).then(function(response) {
-            //     $scope.patients = response.data.data;
-            //     $scope.groupModal.hide();
-            // });
+            //$state.go('doc.profile')
+
         })
-        console.log($scope.patientGroup);
+
     }
 
     /*
-    	打开病历弹出层
+        打开病历弹出层
      */
     client.openCaseModal = function(diseaseCases) {
         $scope.modalCase = diseaseCases;
@@ -119,18 +116,18 @@ var patientGroupListCtrl = function($scope, config, storage, httpService, $state
     }
 
     /*
-    	关闭病历弹出层
+        关闭病历弹出层
      */
     client.closeCaseModal = function() {
         $scope.caseModal.hide();
     }
 
     /*
-    	加载弹出层
+        加载弹出层
      */
     client.loadModal = function() {
         /*
-        	病历弹出层
+            病历弹出层
          */
         $ionicModal.fromTemplateUrl('case-modal.html', {
             scope: $scope,
@@ -140,13 +137,23 @@ var patientGroupListCtrl = function($scope, config, storage, httpService, $state
         });
 
         /*
-        	分组弹出层
+            分组弹出层
          */
         $ionicModal.fromTemplateUrl('group-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function(modal) {
             $scope.groupModal = modal;
+        });
+
+
+        $scope.$on('$ionicView.beforeLeave', function() {
+            console.log('destroy')
+            $scope.caseModal.hide();
+             $scope.groupModal.hide();
+            $scope.caseModal.remove();
+            $scope.groupModal.remove();
+
         });
     }
 

@@ -1,4 +1,4 @@
-var loginCtrl = function($scope, config, regExpHelper, tips, httpService, storage, $location, $http) {
+var loginCtrl = function($scope, config, regExpHelper, tips, httpService, storage, $location, $http, $state) {
 
 
     $scope.server = server = {};
@@ -41,43 +41,46 @@ var loginCtrl = function($scope, config, regExpHelper, tips, httpService, storag
 
             if (params.password.length > 0) {
 
-                server.login(params.user, params.password).then(function(response) { //登录成功
+                server.getCustomer();
 
-                    var token = response.data;
-                    //写入
-                    storage.set(config.tokenKey, token);
+                // var url = config.accountApp + '/Account/getConfirmCode';
+                // var data = { telOrEmail: '13510271102' };
 
-                    //查询用户信息
-                    server.getCustomer().then(function(response) {
-                        var customer = response.data;
-                        
-                        console.log('customer', customer);
-                        storage.set(config.customerKey, customer);
+                // httpService.get(url, data).then(function(response){
+                //     tips.show('success:', response);
+                // },function(response){
+                //     //tips.show('error:', response);
+                // });
 
-                        //跳转首页 医/患
-                        if (customer.UserType == '医生') {
-                            $location.path('/doc/visitStop');
-                        } else {
-                            tips.show('跳转患者端')
-                        }
+                // $http.get('http://192.168.1.111:8008'+url, { params: data })
+                //     .then(function(response) {
+                //         tips.show('success:', response);
+                //     }, function(response) {
+                //         tips.show('error:', response);
+                //     })
 
-                    });
+                // server.login(params.user, params.password).then(function(response) { //登录成功
 
-                }, function(response) { //登录异常
-                    var error = response.data;
+                //     var token = response.data;
+                //     //写入
+                //     storage.set(config.tokenKey, token);
 
+                //     client.goIndex();
 
-                    if (error.error == 'err_user') { //登录错误
+                // }, function(response) { //登录异常
+                //     var error = response.data;
 
-                        tips.show(error.error_description);
+                //     if (error.error == 'err_user') { //登录错误
 
-                    } else if (error.error == 'err_binding') { //未绑定用户
+                //         tips.show(error.error_description);
 
-                        var redUrl = '/signupConfirm/' + params.user;
-                        $location.path(redUrl);
+                //     } else if (error.error == 'err_binding') { //未绑定用户
 
-                    }
-                });
+                //         var redUrl = '/signupConfirm/' + params.user;
+                //         $location.path(redUrl);
+
+                //     }
+                // });
 
             } else {
                 tips.show('请输入密码');
@@ -89,8 +92,42 @@ var loginCtrl = function($scope, config, regExpHelper, tips, httpService, storag
         }
     }
 
+    /*
+        跳转个人主页
+     */
+    client.goIndex = function() {
+        //查询用户信息
+        server.getCustomer().then(function(response) {
+            var customer = response.data;
 
+            console.log('customer', customer);
+            storage.set(config.customerKey, customer);
 
+            //跳转首页 医/患
+            if (customer.UserType == '医生') {
+                $location.path('/doc/index');
+            } else {
+                tips.show('跳转患者端')
+            }
+
+        });
+    }
+
+    /*
+        权限跳转
+     */
+    client.init = function() {
+
+        //localstorage存在 且token未过期
+        var customer = storage.get(config.customerKey);
+        console.log('customer:', customer);
+        if (customer) {
+            client.goIndex();
+        }
+
+    }
+
+    client.init();
 
 }
 
