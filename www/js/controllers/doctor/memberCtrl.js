@@ -1,4 +1,4 @@
-var memberCtrl = function($scope, config, storage, $state, $stateParams, httpService, $ionicPopup) {
+var memberCtrl = function($scope, config, storage, $state, $stateParams, httpService, $ionicPopup, $ionicHistory) {
 
     $scope.server = server = {};
     $scope.params = params = {};
@@ -43,9 +43,22 @@ var memberCtrl = function($scope, config, storage, $state, $stateParams, httpSer
         跳转
      */
     client.ifRedirect = function(redirectTo) {
-        if (redirectTo) {
-            $state.go(redirectTo);
-        }
+        // if (redirectTo) {
+        //     console.log('redirectTo:', redirectTo);
+        //     $state.go(redirectTo);
+        //     redirectTo = null;
+        // }
+        var backView = $ionicHistory.viewHistory().backView;
+        console.log('viewHistory',$ionicHistory.viewHistory(),backView.stateName)
+        // if (backView && backView.stateName == 'doc.index') {
+        //     console.log('go')
+        //     $state.go(redirectTo);
+        // }
+        // else
+        // {
+        //     console.log('dont')
+        // }
+
 
     }
 
@@ -75,6 +88,7 @@ var memberCtrl = function($scope, config, storage, $state, $stateParams, httpSer
 
 
     client.init = function() {
+        console.log('init');
 
         client.ifRedirect($stateParams.redirectTo);
 

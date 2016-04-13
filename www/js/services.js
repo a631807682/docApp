@@ -65,8 +65,8 @@ angular.module('services', [])
             if (response.status === 401) { //无权限
                 // var $state = $injector.get('$state');
                 // $state.go('login');
-             
-             $ionicLoading.show({
+
+                $ionicLoading.show({
                     template: '请检测您的网络状况401' + JSON.stringify(response),
                     noBackdrop: true,
                     duration: 10 * 1000
@@ -101,7 +101,7 @@ angular.module('services', [])
 
             var httpConfig = {
                 headers: {
-                    'Authorization': 'Bearer' + token
+                    'Authorization': 'Bearer ' + token
                 }
             };
 
@@ -132,15 +132,15 @@ angular.module('services', [])
             var httpConfig = {
                 params: params,
                 headers: {
-                    Authorization: 'Bearer' + token
+                    Authorization: 'Bearer ' + token
                 }
             };
 
-            // $ionicBackdrop.retain();
-            // $ionicLoading.show({
-            //     template: "<ion-spinner icon='ios' class='spinner spinner-ios '></ion-spinner>",
-            //     noBackdrop: true
-            // });
+            $ionicBackdrop.retain();
+            $ionicLoading.show({
+                template: "<ion-spinner icon='ios' class='spinner spinner-ios '></ion-spinner>",
+                noBackdrop: true
+            });
 
             // return $http.get(config.host + url, httpConfig).success(function() {
 
@@ -149,7 +149,14 @@ angular.module('services', [])
 
             // });
             var deferred = $q.defer();
-            $http.get(config.host + url, httpConfig).then(deferred.resolve, deferred.reject);
+            $http.get(config.host + url, httpConfig).then(function(response) {
+                $ionicBackdrop.release();
+                $ionicLoading.hide();
+
+                deferred.resolve(response);
+            }, function(response) {
+                deferred.reject(response);
+            });
             return deferred.promise;
 
         },

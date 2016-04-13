@@ -41,46 +41,28 @@ var loginCtrl = function($scope, config, regExpHelper, tips, httpService, storag
 
             if (params.password.length > 0) {
 
-                server.getCustomer();
+                server.login(params.user, params.password).then(function(response) { //登录成功
 
-                // var url = config.accountApp + '/Account/getConfirmCode';
-                // var data = { telOrEmail: '13510271102' };
+                    var token = response.data;
+                    //写入
+                    storage.set(config.tokenKey, token);
 
-                // httpService.get(url, data).then(function(response){
-                //     tips.show('success:', response);
-                // },function(response){
-                //     //tips.show('error:', response);
-                // });
+                    client.goIndex();
 
-                // $http.get('http://192.168.1.111:8008'+url, { params: data })
-                //     .then(function(response) {
-                //         tips.show('success:', response);
-                //     }, function(response) {
-                //         tips.show('error:', response);
-                //     })
+                }, function(response) { //登录异常
+                    var error = response.data;
 
-                // server.login(params.user, params.password).then(function(response) { //登录成功
+                    if (error.error == 'err_user') { //登录错误
 
-                //     var token = response.data;
-                //     //写入
-                //     storage.set(config.tokenKey, token);
+                        tips.show(error.error_description);
 
-                //     client.goIndex();
+                    } else if (error.error == 'err_binding') { //未绑定用户
 
-                // }, function(response) { //登录异常
-                //     var error = response.data;
+                        var redUrl = '/signupConfirm/' + params.user;
+                        $location.path(redUrl);
 
-                //     if (error.error == 'err_user') { //登录错误
-
-                //         tips.show(error.error_description);
-
-                //     } else if (error.error == 'err_binding') { //未绑定用户
-
-                //         var redUrl = '/signupConfirm/' + params.user;
-                //         $location.path(redUrl);
-
-                //     }
-                // });
+                    }
+                });
 
             } else {
                 tips.show('请输入密码');

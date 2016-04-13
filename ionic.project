@@ -1,4 +1,11 @@
 {
   "name": "docApp",
-  "app_id": ""
+  "app_id": "",
+  "browsers": [
+    {
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "1.4.0"
+    }
+  ]
 }
