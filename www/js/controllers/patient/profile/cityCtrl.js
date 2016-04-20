@@ -60,4 +60,4 @@ var cityCtrl = function($scope, config, storage, httpService, $stateParams, $sta
 
 
 }
-angular.module('controllers').controller('doc.profile.cityCtrl', cityCtrl);
+angular.module('controllers').controller('patient.profile.cityCtrl', cityCtrl);

@@ -1,0 +1,10 @@
+<ion-view view-title="科室分类" cache-view="false" hide-tabs>
+
+    <ion-content>
+        <div class="list">
+            <a href="javascript:void(0)" class="item"  ng-repeat="class in diseaseClass" ng-click="client.checkDiseaseClass(class)">
+               {{class.Name}}
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

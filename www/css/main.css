@@ -141,3 +141,20 @@
       color: #cccccc; }
       .chat .chat-block .name:after {
         content: ":"; }
+
+/**
+ * 找医生
+ */
+.find-doctor .tetris {
+  width: 50%;
+  position: relative;
+  float: left;
+  padding-top: 5px; }
+  .find-doctor .tetris a {
+    display: block;
+    text-align: center;
+    color: #fff;
+    height: 90px;
+    padding-top: 35px;
+    padding-bottom: 5px;
+    font-size: 20px; }

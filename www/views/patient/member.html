@@ -1,0 +1,19 @@
+<ion-view view-title="我" cache-view="false">
+    <ion-content>
+        <div class="list">
+            <div class="item item-thumbnail-left" href="#">
+                <img ng-src="{{patient.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+patient.CustomerUser.Photo}}" />
+                <h2>{{patient.CustomerUser.Name}}</h2>
+                <p>{{patient.CustomerUser.Province}} {{patient.CustomerUser.City}}</p>
+                <p>{{patient.CustomerUser.Gender}} {{patient.CustomerUser.Age}}岁</p>
+            </div>
+            <div class="list">
+                <a href="#/patient/member/profile" class="item">个人资料</a>
+                <a href="#/patient/member/onlineMessage" class="item">网络咨询</a>
+                <a href="#/patient/member/telAppoint" class="item">电话咨询</a>
+                <a href="#/patient/member/order" class="item">我的订单</a>
+                <a href="javascript:void(0)" ng-click="client.logout()" class="item">退出登录</a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

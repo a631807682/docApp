@@ -1,0 +1,31 @@
+<ion-view view-title="个人资料" cache-view="false" hide-tabs>
+
+    <ion-content>
+        <div>
+            <div class="list card">
+                <a href="javascript:void(0)" class="item" ng-click="client.go('patient.profile-avatar')">
+                    <span class="title">头像</span>
+                    <img ng-src="{{customer.Photo==null?'/img/noavatar.jpg':imgPath+customer.Photo}}" />
+                </a>
+                <a href="javascript:void(0)" class="item" ng-click="client.go('patient.profile-name')">
+                    <span class="title">名字</span>
+                    <span>{{customer.Name}}</span>
+                </a>
+                <a href="javascript:void(0)" class="item" ng-click="client.go('patient.profile-province')">
+                    <span class="title">地址</span>
+                    <span>{{customer.Province}}{{customer.City}}</span>
+                </a>
+            </div>
+            <div class="list card">
+                <a href="javascript:void(0)" class="item" ng-click="client.genderList()">
+                    <span class="title">性别</span>
+                    <span>{{customer.Gender}}</span>
+                </a>
+                <a href="javascript:void(0)" class="item" ng-click="client.go('patient.profile-age')">
+                    <span class="title">年龄</span>
+                    <span>{{customer.Age}}</span>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

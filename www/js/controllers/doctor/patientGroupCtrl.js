@@ -93,6 +93,7 @@ var patientGroupCtrl = function($scope, config, storage, httpService, $state, $s
     }
 
 
+
     /*
         加载弹出层
      */
@@ -108,7 +109,7 @@ var patientGroupCtrl = function($scope, config, storage, httpService, $state, $s
 
         });
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$ionicView.beforeLeave', function() {
             $scope.groupModal.remove();
         });
     }

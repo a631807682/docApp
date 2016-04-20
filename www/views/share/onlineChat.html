@@ -52,7 +52,7 @@
                             </div>
                             <div ng-if="(item.message.Content|needEven)!=true">
                                 <div ng-if="(freeIndex<$index||freeIndex==$index)">
-                                    <a ng-click="client.ToPay()">{{item.message.Content|systemHints:chatInfo.ChatSystemHints}}</a>
+                                    <a ng-click="client.toPay()">{{item.message.Content|systemHints:chatInfo.ChatSystemHints}}</a>
                                 </div>
                                 <div ng-if="(freeIndex>$index)">
                                     {{item.message.Content|systemHints:chatInfo.ChatSystemHints}}

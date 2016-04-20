@@ -9,7 +9,7 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
     'async', 'ion-datetime-picker', 'datetime', 'checklist-model'
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $state) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -23,12 +23,31 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
             StatusBar.styleDefault();
         }
     });
+
+    $rootScope.fromState = {};
+    $rootScope.fromParams = {};
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+
+        //console.log('toState:', toState, 'toParams:', toParams, 'fromState:', fromState, 'fromParams:', fromParams)
+        // if (toParams && toParams.redirectTo && angular.isDefined(toParams.redirectTo)) {
+
+        $rootScope.fromState = fromState;
+        $rootScope.fromParams = fromParams;
+
+        // }
+
+    });
+
+
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
 
     $httpProvider.interceptors.push('httpInterceptor'); //权限拦截
     $httpProvider.defaults.useXDomain = true;
+    // note that you can also chain configs
+    $ionicConfigProvider.backButton.text('返回').icon('ion-chevron-left');
 
     //doctor
     $stateProvider
@@ -261,6 +280,235 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
 
 
 
+    $stateProvider
+        .state('patient', {
+            url: '/patient',
+            abstract: true,
+            templateUrl: 'views/patient/tabs.html'
+        }).state('patient.index', {
+            url: '/index',
+            views: {
+                'patient-index': {
+                    templateUrl: 'views/patient/index.html',
+                    controller: 'patient.indexCtrl'
+                }
+            }
+        }).state('patient.myDoctor', {
+            url: '/myDoctor',
+            views: {
+                'patient-myDoctor': {
+                    templateUrl: 'views/patient/myDoctor.html',
+                    controller: 'patient.myDoctorCtrl'
+                }
+            }
+        })
+        .state('patient.doctors', {
+            url: '/doctors',
+            params: {
+                redirectTo: '',
+                redirectParams: ''
+            },
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctors.html',
+                    controller: 'patient.doctorsCtrl'
+                }
+            }
+        })
+        .state('patient.doctors-province', {
+            url: '/doctors/province',
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctors/province.html',
+                    controller: 'patient.doctors.provinceCtrl'
+                }
+            }
+        })
+        .state('patient.doctors-city', {
+            url: '/doctors/city',
+            params: {
+                proName: ''
+            },
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctors/city.html',
+                    controller: 'patient.doctors.cityCtrl'
+                }
+            }
+        })
+        .state('patient.doctors-hospital', {
+            url: '/doctors/hospital/:cityName',
+            params: {
+                cityName: ''
+            },
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctors/hospital.html',
+                    controller: 'patient.doctors.hospitalCtrl'
+                }
+            }
+        })
+        .state('patient.doctors-searchDoctors', {
+            url: '/doctors/searchDoctors',
+            params: {
+                hospitalId: '',
+                diseaseId: '',
+                name: ''
+            },
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctors/searchDoctors.html',
+                    controller: 'patient.doctors.searchDoctorsCtrl'
+                }
+            }
+        })
+        .state('patient.doctors-diseaseClass', {
+            url: '/doctors/diseaseClass',
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctors/diseaseClass.html',
+                    controller: 'patient.doctors.diseaseClassCtrl'
+                }
+            }
+        })
+        .state('patient.doctors-disease', {
+            url: '/doctors/disease',
+            params: {
+                diseaseClassId: ''
+            },
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctors/disease.html',
+                    controller: 'patient.doctors.diseaseCtrl'
+                }
+            }
+        })
+        .state('patient.doctorDetail', {
+            url: '/doctorDetail/:doctorId',
+            params: {
+                doctorId: ''
+            },
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctorDetail.html',
+                    controller: 'patient.doctorDetailCtrl'
+                }
+            }
+        })
+        .state('patient.member', {
+            url: '/member',
+            params: {
+                redirectTo: '',
+                redirectParams: ''
+            },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/member.html',
+                    controller: 'patient.memberCtrl'
+                }
+            }
+        }).state('patient.profile', {
+            url: '/member/profile',
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/profile.html',
+                    controller: 'patient.profileCtrl'
+                }
+            }
+        }).state('patient.profile-age', {
+            url: '/member/profile/age',
+            params: { customer: {} },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/profile/age.html',
+                    controller: 'patient.profile.ageCtrl'
+                }
+            }
+        }).state('patient.profile-avatar', {
+            url: '/member/profile/avatar',
+            params: { customer: {} },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/profile/avatar.html',
+                    controller: 'patient.profile.avatarCtrl'
+                }
+            }
+        }).state('patient.profile-province', {
+            url: '/member/profile/province',
+            params: { customer: {} },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/profile/province.html',
+                    controller: 'patient.profile.provinceCtrl'
+                }
+            }
+        }).state('patient.profile-city', {
+            url: '/member/profile/city',
+            params: {
+                customer: {}
+            },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/profile/city.html',
+                    controller: 'patient.profile.cityCtrl'
+                }
+            }
+        }).state('patient.profile-name', {
+            url: '/member/profile/name',
+            params: { customer: {} },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/profile/name.html',
+                    controller: 'patient.profile.nameCtrl'
+                }
+            }
+        }).state('patient.telAppoint', {
+            url: '/member/telAppoint',
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/telAppoint.html',
+                    controller: 'patient.telAppointCtrl'
+                }
+            }
+        }).state('patient.telAppointDetail', {
+            url: '/member/telAppointDetail/:telId',
+            params: {
+                telId: ''
+            },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/telAppointDetail.html',
+                    controller: 'patient.telAppointDetailCtrl'
+                }
+            }
+        }).state('patient.onlineMessage', {
+            url: '/member/onlineMessage',
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/onlineMessage.html',
+                    controller: 'patient.onlineMessageCtrl'
+                }
+            }
+        }).state('patient.onlineChat', {
+            url: '/member/onlineChat/:chatId',
+            params: {
+                chatId: ''
+            },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/share/onlineChat.html',
+                    controller: 'share.onlineChatCtrl'
+                }
+            }
+        }).state('patient.order', {
+            url: '/member/order',
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/order.html',
+                    controller: 'patient.orderCtrl'
+                }
+            }
+        })
 
 
 

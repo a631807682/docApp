@@ -5,7 +5,7 @@ var loginCtrl = function($scope, config, regExpHelper, tips, httpService, storag
     $scope.params = params = {};
     $scope.client = client = {};
 
-    params.user = '13510271102';
+    params.user = '631807682@qq.com';
     params.password = '123456';
 
 
@@ -35,7 +35,7 @@ var loginCtrl = function($scope, config, regExpHelper, tips, httpService, storag
 
 
     client.login = function() {
-
+ 
 
         if (regExpHelper.isEmail(params.user) || regExpHelper.isMobile(params.user)) {
 
@@ -89,7 +89,7 @@ var loginCtrl = function($scope, config, regExpHelper, tips, httpService, storag
             if (customer.UserType == '医生') {
                 $location.path('/doc/index');
             } else {
-                tips.show('跳转患者端')
+               $location.path('/patient/index');
             }
 
         });

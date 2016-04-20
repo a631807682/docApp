@@ -1,0 +1,28 @@
+<ion-view view-title="云医生" cache-view="false">
+    <ion-content>
+        <div>
+            <div class="row">
+                <div class="item-image">
+                    <img ng-src="/img/car-1.jpg">
+                </div>
+            </div>
+            <div class="list">
+                <div class="item item-divider">
+                    网络咨询
+                </div>
+                <a class="item item-avatar" ng-click="client.goMessage(chat.OnlineChatId)" ng-repeat="chat in chats">
+                    <img ng-src="{{chat.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+chat.CustomerUser.Photo}}" />
+                    <h2>{{chat.CustomerUser.Name}} </h2>
+                    <p>{{chat.OnlineChatItem.CreatedOn| date:"yyyy-MM-dd hh:mm:ss"}}</p>
+                </a>
+                <div class="item item-divider">
+                    电话咨询
+                </div>
+                <a class="item " ng-click="client.goTel(tel.TelAppointmentId)" ng-repeat="tel in telAppoints">
+                    <h2>关于"{{tel.Diesease}}"的咨询</h2>
+                     <p>{{tel.CreateOn| date:"yyyy-MM-dd hh:mm:ss"}}</p>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

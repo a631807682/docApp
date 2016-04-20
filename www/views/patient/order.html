@@ -1,0 +1,22 @@
+<ion-view view-title="我的订单" cache-view="false" hide-tabs> 
+    <ion-content>
+        <ul class="tab-menu tab-menu-3">
+            <li ng-click="client.show('待支付')" ng-class="{'待支付': 'active'}[type]">待支付</li>
+            <li ng-click="client.show('已支付')" ng-class="{'已支付': 'active'}[type]"> 已支付</li>
+            <li ng-click="client.show('已取消')" ng-class="{'已取消': 'active'}[type]"> 已取消</li>
+        </ul>
+        <div class="list">
+            <a class="item" ng-repeat="order in showOrders" href="">
+                <div>订单号: {{order.Name}}</div>
+                <div>就诊医生：{{order.UserB.Name}}医生</div>
+                <div>订单类型：{{order.OrderType}}</div>
+                <div>收费金额：{{order.Price|number:2}}元</div>
+                <div>付款状态：{{order.OrderState}}</div>
+                <div>订单日期：{{order.CreateTime|date:'yyyy-MM-dd'}}</div>
+                <div ng-if="order.OrderState=='待支付'">
+                    <button class="button button-positive button-block" ng-click="client.Pay(order.OrderId)">去支付</button>
+                </div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

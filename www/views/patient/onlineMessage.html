@@ -1,0 +1,20 @@
+<ion-view view-title="网络咨询" cache-view="false" hide-tabs>
+    <ion-content>
+        <div class="list">
+            <a class="item" ng-repeat="message in messages" href="#/patient/member/onlineChat/{{message.OnlineChat.OnlineChatId}}">
+                <div>
+                    <div>{{message.OnlineChat.UserB.Name}}</div>
+                    <div>{{message.NosawCount}}</div>
+                </div>
+                <div>
+                    <p ng-if="message.OnlineChatItem.ContentType=='通知'">
+                        最新动态：系统消息
+                    </p>
+                    <p ng-if="message.OnlineChatItem.ContentType!='通知'">
+                        最新动态：{{message.OnlineChatItem.Content|limitTo:30}}...
+                    </p>
+                </div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

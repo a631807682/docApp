@@ -1,0 +1,39 @@
+<ion-view view-title="找医生" cache-view="false">
+    <ion-content>
+        <div class="find-doctor">
+            <div class="list list-inset ">
+                <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="text" placeholder="按照医院/医生/疾病查找">
+                </label>
+                <div>
+                    <div class="tetris">
+                        <a class="back-color-yellow" href="#/patient/doctors/province">
+                            <i class="ion-ios-home"></i> 按医院
+                        </a>
+                    </div>
+                    <div class="tetris">
+                        <a class="back-color-green" href="#/patient/doctors/diseaseClass">
+                            <i class="ion-ios-medkit"></i> 按疾病
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="list">
+                <div class="item item-divider">
+                    <i class="ion-thumbsup"></i> 医生推荐
+                </div>
+                <div ng-repeat="top in tops">
+                    <div class="item item-divider">
+                        {{top.CateName}}
+                    </div>
+                    <a href="#/patient/doctorDetail/{{doctor.DoctorId}}" class="item item-avatar" ng-repeat="doctor in top.Doctors">
+                        <img ng-src="{{doctor.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+doctor.CustomerUser.Photo}}" />
+                        <h2>{{doctor.CustomerUser.Name}}</h2>
+                        <p>{{doctor.Hospital.Name}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

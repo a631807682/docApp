@@ -1,0 +1,37 @@
+<ion-view view-title="电话咨询" cache-view="false" hide-tabs>
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="client.openTelModal()">
+            <i class="ion-plus-round"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list">
+            <a class="item " ng-repeat="tel in tels" href="#/patient/member/telAppointDetail/{{tel.TelAppointment.TelAppointmentId}}">
+                <h2>关于"{{tel.TelAppointment.Diesease}}"的咨询</h2>
+                <p>{{tel.TelAppointment.CreateOn| date:"yyyy-MM-dd hh:mm:ss"}}</p>
+            </a>
+        </div>
+    </ion-content>
+    <script id="tel-modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar>
+                <button class="button" ng-click="client.closeTelModal()">返回</button>
+                <h1 class="title">添加分组</h1>
+                <button class="button" ng-click="client.create()">保存</button>
+            </ion-header-bar>
+            <ion-content>
+                <div class="list">
+                    <div class="item item-input">
+
+                        <input type="text" placeholder="疾病" ng-model="params.tel.diesease">
+                    </div>
+                    <div class="item item-input">
+
+                        <textarea type="text" placeholder="疾病描述" ng-model="params.tel.content">
+                        </textarea>
+                    </div>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+</ion-view>

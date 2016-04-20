@@ -63,14 +63,14 @@ angular.module('services', [])
             $ionicLoading.hide();
 
             if (response.status === 401) { //无权限
-                // var $state = $injector.get('$state');
-                // $state.go('login');
+                var $state = $injector.get('$state');
+                $state.go('login');
 
-                $ionicLoading.show({
-                    template: '请检测您的网络状况401' + JSON.stringify(response),
-                    noBackdrop: true,
-                    duration: 10 * 1000
-                });
+                // $ionicLoading.show({
+                //     template: '请检测您的网络状况401' + JSON.stringify(response),
+                //     noBackdrop: true,
+                //     duration: 10 * 1000
+                // });
             } else {
                 // console.log('请检测您的网络状况')
                 $ionicLoading.show({

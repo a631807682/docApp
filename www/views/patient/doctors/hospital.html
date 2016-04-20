@@ -1,0 +1,10 @@
+<ion-view view-title="医院" cache-view="false" hide-tabs>
+
+    <ion-content>
+        <div class="list">
+        <a href="javascript:void(0)" class="item"  ng-repeat="hospital in hospitals" ng-click="client.checkHospital(hospital)">
+               {{hospital.Name}}
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

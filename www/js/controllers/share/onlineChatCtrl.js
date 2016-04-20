@@ -14,7 +14,7 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
 
     //轮训昨天
     var enableConnect = true;
-    $scope.$on("$destroy", function() { //视图销毁
+    $scope.$on("$ionicView.beforeLeave", function() { //视图销毁
         enableConnect = false; //轮询销毁
     });
 
@@ -74,7 +74,7 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
 
 
     /*
-    	保持会话轮训
+        保持会话轮训
      */
     client.connecting = function() {
 
@@ -129,7 +129,7 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
     }
 
     /*
-    	清空多余记录
+        清空多余记录
      */
     client.clear = function(max) {
         if ($scope.contents.length > max) {
@@ -140,7 +140,7 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
     }
 
     /*
-    	检测免费条目
+        检测免费条目
      */
     client.checkFree = function() {
 
@@ -194,7 +194,7 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
     }
 
     /*
-    	发送
+        发送
      */
     client.sendMessage = function(contentType) {
 
@@ -211,7 +211,7 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
     }
 
     /*
-    	添加等待中信息
+        添加等待中信息
      */
     client.pushWaitingMessage = function(userId, message) {
 
@@ -230,7 +230,7 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
     }
 
     /*
-    	收费提示
+        收费提示
      */
     client.payHints = function() {
         var contentType = 2;
@@ -239,15 +239,22 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
     }
 
     /*
-    	收费
+        收费
      */
     client.pay = function() {
 
         server.getOrder(params.chatId).then(function(response) {
-        	var orderId = response.data.data;
+            var orderId = response.data.data;
 
         });
 
+    }
+
+    /*
+        去支付
+     */
+    client.toPay = function(){
+        console.log('去订单模块支付')
     }
 
     client.init = function() {
@@ -260,13 +267,13 @@ var onlineChatCtrl = function($scope, config, storage, httpService, $state, tips
         //初始化聊天室基本信息
         server.getChatInfo(params.chatId, params.userId).then(function(response) {
             var chatInfo = response.data.data;
-
-            if (parseInt(chatInfo.ConsultationRight.Time) > 0) {
+          console.log(chatInfo);
+            if (chatInfo.ConsultationRight && parseInt(chatInfo.ConsultationRight.Time) > 0) {
                 $scope.freeNum = chatInfo.ConsultationRight.Time;
             }
 
             $scope.chatInfo = chatInfo;
-            console.log($scope.chatInfo);
+  
 
             client.connecting();
         });

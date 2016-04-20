@@ -1,0 +1,11 @@
+<ion-view view-title="查找医生列表" cache-view="false" hide-tabs>
+    <ion-content>
+        <div class="list">
+            <a href="#/patient/doctorDetail/{{doctor.DoctorId}}" class="item item-avatar" ng-repeat="doctor in doctors">
+                <img ng-src="{{doctor.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+doctor.CustomerUser.Photo}}" />
+                <h2>{{doctor.CustomerUser.Name}}</h2>
+                <p>{{doctor.Hospital.Name}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

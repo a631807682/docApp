@@ -104,4 +104,4 @@ var profileCtrl = function($scope, config, storage, httpService, $state, $stateP
 
     client.init();
 }
-angular.module('controllers').controller('doc.profileCtrl', profileCtrl);
+angular.module('controllers').controller('patient.profileCtrl', profileCtrl);

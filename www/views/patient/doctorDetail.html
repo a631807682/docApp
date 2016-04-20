@@ -1,0 +1,42 @@
+<ion-view view-title="医生信息" cache-view="false" hide-tabs>
+    <ion-content>
+        <div class="list card">
+            <div class="item item-thumbnail-left item-text-wrap">
+                <img ng-src="{{doctor.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+doctor.CustomerUser.Photo}}" />
+                <h2>{{doctor.CustomerUser.Name}} {{doctor.Title}}</h2>
+                <p>{{doctor.Hospital.Name}} {{doctor.DiseaseCategory.Name}}</p>
+                <p>擅长: {{doctor.GoodAt|limitTo:100}} </p>
+            </div>
+            <div class="item  item-text-wrap">
+                <span class="title">简介</span>
+                <p>{{doctor.Description}}</p>
+            </div>
+            <div class="item">
+                <button class="button button-positive button-block">网络咨询</button>
+                <button class="button button-positive button-block">电话咨询</button>
+            </div>
+        </div>
+        <div class="list card">
+            <div class="item item-divider">
+                出停诊
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col col-25"></div>
+                    <div class="col col-25">上午</div>
+                    <div class="col col-25">下午</div>
+                    <div class="col col-25">夜间</div>
+                </div>
+                <div class="row" ng-repeat="item in scheuding.SchedulingItems">
+                    <div class="col col-25">{{item.WeekN}}</div>
+                    <div class="col col-25">{{item.SPlace}}</div>
+                    <div class="col col-25">{{item.ZPlace}}</div>
+                    <div class="col col-25">{{item.XPlace}}</div>
+                </div>
+                <div class="row padding">
+                    <p>备注:{{scheuding.Scheduling.Tip}}</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

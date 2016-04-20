@@ -1,0 +1,44 @@
+<ion-view view-title="咨询详情" cache-view="false" hide-tabs>
+    <ion-content>
+        <div class="list card">
+            <div class="item item-text-wrap">
+                <div>
+                    <label>疾病:</label>
+                    <label>{{tel.TelAppointment.Diesease}}</label>
+                </div>
+                <div>
+                    <label>疾病描述:</label>
+                    <label>{{tel.TelAppointment.Content}}</label>
+                </div>
+                <div>
+                    <label>处理状态:</label>
+                    <label>{{tel.TelAppointment.TelState}}</label>
+                </div>
+                <div ng-if="tel.TelAppointment.TelState=='完成'||tel.TelAppointment.TelState=='分配'">
+                    <div>
+                        <label>分配医生:</label>
+                        <label>{{tel.TelAppointment.UserB.Name}}医生</label>
+                    </div>
+                    <div>
+                        <label>预约时间:</label>
+                        <label>{{tel.TelAppointment.DetailTime}}</label>
+                    </div>
+                    <div>
+                        <label>订单号:</label>
+                        <label>{{tel.Order.Name}}</label>
+                    </div>
+                    <div>
+                        <label>资讯费用:</label>
+                        <label>{{tel.Order.Price}}</label>
+                    </div>
+                    <div>
+                        <label>付款情况:</label>
+                        <label>{{tel.Order.OrderState}}</label>
+                    </div>
+                    <button class="button button-positive button-block" ng-if="tel.TelAppointment.TelState=='分配'&&tel.Order.OrderState=='待支付'" ng-click="client.Pay(tel.Order.OrderId)">去支付</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </ion-content>
+</ion-view>
