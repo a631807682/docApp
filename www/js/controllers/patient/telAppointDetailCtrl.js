@@ -16,6 +16,15 @@ var telAppointDetailCtrl = function($scope, config, storage, httpService, $state
         return httpService.get(url, data);
     }
 
+    client.goPay = function(orderId) {
+
+        var name = 'patient.orderDetail';
+        var data = {
+            orderId: orderId
+        };
+        $state.go(name, data);
+    }
+
     client.init = function() {
         var telId = $stateParams.telId;
         server.getTelAppoint(telId).then(function(response) {

@@ -1,4 +1,4 @@
-var avatarCtrl = function($scope, config, storage, httpService, $stateParams, $ionicActionSheet, tips, $cordovaCamera) {
+var avatarCtrl = function($scope, config, storage, httpService, $state, $stateParams, $ionicActionSheet, tips, $cordovaCamera) {
 
     $scope.server = server = {};
     $scope.params = params = {};
@@ -6,6 +6,36 @@ var avatarCtrl = function($scope, config, storage, httpService, $stateParams, $i
 
     $scope.imgPath = config.imgPath;
     $scope.preview = false;
+
+    server.save = function(customer) {
+
+        var url = config.docApp + '/CustomerUsers/UpdateCustomer/';
+
+        var data = customer;
+
+        return httpService.post(url, data);
+
+    }
+
+
+    client.update = function(imageURI) {
+
+        httpService.upload(imageURI).then(function(url) {
+            $scope.preview = true;
+            $scope.imageURI = url;
+            params.customer.Photo = url;
+
+            tips.show(url);
+
+            server.save(params.customer).then(function(response) {
+                $state.go('patient.profile', {});
+            })
+
+
+        }, function(err) {
+            tips.show(err);
+        })
+    }
 
 
     client.show = function() {
@@ -23,18 +53,12 @@ var avatarCtrl = function($scope, config, storage, httpService, $stateParams, $i
                     if (index == 0) {
                         client.gallery().then(function(imageURI) {
 
-                            httpService.upload(imageURI, function(url) {
-                                $scope.preview = true;
-                                $scope.imageURI = url;
-                            })
+                            client.update(imageURI);
                         });
                     } else if (index == 1) {
                         client.camera().then(function(imageURI) {
-                            
-                            httpService.upload(imageURI, function(url) {
-                                $scope.preview = true;
-                                $scope.imageURI = url;
-                            })
+
+                            client.update(imageURI);
                         });
                     }
 

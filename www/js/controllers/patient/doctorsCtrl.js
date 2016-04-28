@@ -27,8 +27,9 @@ var doctorsCtrl = function($scope, $rootScope, config, storage, httpService, $st
         var sources = [];
         sources.push('patient.myDoctor');
 
-        if (angular.isDefined(redirectTo)) {
-            if (angular.isDefined($rootScope.fromState.name)) { //访问源
+        if (angular.isDefined(redirectTo) && redirectTo != '') {
+
+            if (angular.isDefined($rootScope.fromState) && angular.isDefined($rootScope.fromState.name)) { //访问源
 
                 angular.forEach(sources, function(e, i) {
                     if (e == $rootScope.fromState.name) {
@@ -38,6 +39,13 @@ var doctorsCtrl = function($scope, $rootScope, config, storage, httpService, $st
             }
         }
 
+    }
+
+    /*
+        跳转查询页
+     */
+    client.goSearch = function() {
+        $state.go('patient.doctors-search');
     }
 
 

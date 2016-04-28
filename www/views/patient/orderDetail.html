@@ -1,0 +1,15 @@
+<ion-view view-title="订单详情" cache-view="false" hide-tabs>
+    <ion-content>
+        <div class="list card">
+         <div>订单号: {{order.Name}}</div>
+                <div>就诊医生：{{order.UserB.Name}}医生</div>
+                <div>订单类型：{{order.OrderType}}</div>
+                <div>收费金额：{{order.Price|number:2}}元</div>
+                <div>付款状态：{{order.OrderState}}</div>
+                <div>订单日期：{{order.CreateTime|date:'yyyy-MM-dd'}}</div>
+                <div ng-if="order.OrderState=='待支付'">
+                    <button class="button button-positive button-block" ng-click="client.pay()">支付宝支付</button>
+                </div>
+        </div>
+    </ion-content>
+</ion-view>

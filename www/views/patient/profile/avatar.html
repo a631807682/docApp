@@ -7,9 +7,8 @@
     <ion-content>
         <div class="list card">
             <div class="item item-image">
-                <img ng-if="!preview" ng-src="{{params.customer.Photo==null?'/img/noavatar.jpg':imgPath+params.customer.Photo}}" />
-
-                 <img ng-if="preview" ng-src="{{imageURI}}"/>
+                <img ng-if="!preview" ng-src="{{params.customer.Photo==null?'img/noavatar.jpg':imgPath+params.customer.Photo}}" />
+                <img ng-if="preview" ng-src="{{imgPath+imageURI}}" />
             </div>
         </div>
     </ion-content>

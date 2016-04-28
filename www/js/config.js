@@ -10,6 +10,7 @@ angular.module('docApp').value('config', {
     docApp: "/docpage",
     accountApp: '/api',
     customerApp: '/customerpage',
-    chatApp: "/chatpage"
+    chatApp: "/chatpage",
+    payApp: "/payPage"
 
 });

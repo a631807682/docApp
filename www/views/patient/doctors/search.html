@@ -1,0 +1,17 @@
+<ion-view hide-nav-bar="true" hide-tabs>
+    <ion-content>
+        <div class="bar bar-header item-input-inset ">
+            <a class="button button-clear " ng-click="client.goBack()">
+                <span >取消</span>
+            </a>
+            <label class="item-input-wrapper ">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="search" placeholder="按照医院/医生/疾病查找" ng-model='params.name' focus-me="true">
+
+            </label>
+            <a class="button button-clear " ng-click="client.goSearch(params.name)">
+                <span >确定</span>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

@@ -177,36 +177,46 @@ angular.module('services', [])
 
             return $http.get(config.host + url, httpConfig);
 
+        },
+
+        /**
+         * 图片上传
+         * @param  {[type]}   filePath [description]
+         * @param  {Function} done     [description]
+         * @return {[type]}            [description]
+         */
+        upload: function(filePath) {
+            console.log('filePath', filePath)
+            var deferred = $q.defer();
+            document.addEventListener("deviceready", function() {
+
+                $cordovaFileTransfer.upload(config.uploadServer, filePath)
+                    .then(function(result) {
+                        console.log('result', result)
+                        var response = JSON.parse(result.response);
+                        if (response.status == 'success') {
+                            deferred.resolve(response.url);
+                        } else {
+                            deferred.reject('请上传1MB以下图片');
+                        }
+
+                        // Success!
+                    }, function(err) {
+                        deferred.reject(err);
+                        // Error
+                    }, function(progress) {
+                        // $cordovaProgress
+
+                        // constant progress updates
+                        console.log(progress, (progress.loaded / progress.total) * 100)
+                    });
+
+            });
+
+            return deferred.promise;
+
+
         }
-
-        // /**
-        //  * 图片上传
-        //  * @param  {[type]}   filePath [description]
-        //  * @param  {Function} done     [description]
-        //  * @return {[type]}            [description]
-        //  */
-        // upload: function(filePath, done) {
-
-        //     document.addEventListener("deviceready", function() {
-
-        //         $cordovaFileTransfer.upload(config.uploadServer, filePath)
-        //             .then(function(result) {
-        //                 var response = JSON.parse(result.response);
-        //                 done(response.url);
-        //                 // Success!
-        //             }, function(err) {
-        //                 console.log('Error');
-        //                 // Error
-        //             }, function(progress) {
-        //                 // $cordovaProgress
-
-        //                 // constant progress updates
-        //                 console.log(progress, (progress.loaded / progress.total) * 100)
-        //             });
-
-        //     });
-
-        // }
 
 
 

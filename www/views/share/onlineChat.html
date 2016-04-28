@@ -24,7 +24,7 @@
                                 <div class="text">
                                     <div class="name">{{item.message.UserId |chatUser:chatInfo}}</div>
                                     <div ng-if="item.State=='Wait'">
-                                        <img src="/img/loading.gif" alt="加载中" style="width:10%;height:10%;" />
+                                        <img src="img/loading.gif" alt="加载中" style="width:10%;height:10%;" />
                                     </div>
                                     <div ng-bind-html="item.message.Content|chatContent">
                                     </div>

@@ -1,10 +1,10 @@
-<ion-view view-title="找医生" cache-view="false">
+<ion-view view-title="找医生" >
     <ion-content>
         <div class="find-doctor">
             <div class="list list-inset ">
                 <label class="item item-input">
                     <i class="icon ion-search placeholder-icon"></i>
-                    <input type="text" placeholder="按照医院/医生/疾病查找">
+                    <input type="text" placeholder="按照医院/医生/疾病查找" ng-focus='client.goSearch()'>
                 </label>
                 <div>
                     <div class="tetris">
@@ -28,7 +28,7 @@
                         {{top.CateName}}
                     </div>
                     <a href="#/patient/doctorDetail/{{doctor.DoctorId}}" class="item item-avatar" ng-repeat="doctor in top.Doctors">
-                        <img ng-src="{{doctor.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+doctor.CustomerUser.Photo}}" />
+                        <img ng-src="{{doctor.CustomerUser.Photo==null?'img/noavatar.jpg':imgPath+doctor.CustomerUser.Photo}}" />
                         <h2>{{doctor.CustomerUser.Name}}</h2>
                         <p>{{doctor.Hospital.Name}}</p>
                     </a>

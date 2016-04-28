@@ -1,4 +1,4 @@
-var memberCtrl = function($scope,$rootScope, config, storage, httpService, $state, $ionicPopup, $stateParams) {
+var memberCtrl = function($scope, $rootScope, config, storage, httpService, $state, $ionicPopup, $stateParams) {
 
     $scope.server = server = {};
     $scope.params = params = {};
@@ -57,9 +57,10 @@ var memberCtrl = function($scope,$rootScope, config, storage, httpService, $stat
     client.ifRedirect = function(redirectTo, redirectParams) {
         var sources = [];
         sources.push('patient.index');
+        sources.push('patient.doctorDetail');
         console.log(redirectTo, redirectParams)
 
-        if (angular.isDefined(redirectTo)) {
+        if (angular.isDefined(redirectTo) && redirectTo != '') {
             if (angular.isDefined($rootScope.fromState.name)) { //访问源
 
                 angular.forEach(sources, function(e, i) {

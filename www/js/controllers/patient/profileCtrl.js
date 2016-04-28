@@ -1,4 +1,4 @@
-var profileCtrl = function($scope, config, storage, httpService, $state, $stateParams, $ionicActionSheet, $rootScope) {
+var profileCtrl = function($scope, config, storage, httpService, $state, $stateParams, $ionicActionSheet, $rootScope, $ionicHistory) {
 
     $scope.server = server = {};
     $scope.params = params = {};
@@ -91,6 +91,7 @@ var profileCtrl = function($scope, config, storage, httpService, $state, $stateP
         var customer = storage.get(config.customerKey);
         params.userId = customer.CustomerUserId;
 
+        // $ionicHistory.clearCache();//清空缓存
         //用户详情
         server.getDoctor(params.userId).then(function(response) {
 

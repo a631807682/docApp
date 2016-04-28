@@ -383,6 +383,15 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
                 }
             }
         })
+        .state('patient.doctors-search', {
+            url: '/doctors/search',
+            views: {
+                'patient-doctors': {
+                    templateUrl: 'views/patient/doctors/search.html',
+                    controller: 'patient.doctors.searchCtrl'
+                }
+            }
+        })
         .state('patient.doctorDetail', {
             url: '/doctorDetail/:doctorId',
             params: {
@@ -506,6 +515,18 @@ angular.module('docApp', ['ionic', 'controllers', 'services', 'directives', 'ngC
                 'patient-member': {
                     templateUrl: 'views/patient/order.html',
                     controller: 'patient.orderCtrl'
+                }
+            }
+        })
+        .state('patient.orderDetail', {
+            url: '/member/orderDetail/:orderId',
+            params: {
+                orderId: ''
+            },
+            views: {
+                'patient-member': {
+                    templateUrl: 'views/patient/orderDetail.html',
+                    controller: 'patient.orderDetailCtrl'
                 }
             }
         })

@@ -1,11 +1,12 @@
 <ion-view view-title="个人资料" cache-view="false" hide-tabs>
-
     <ion-content>
         <div>
             <div class="list card">
                 <a href="javascript:void(0)" class="item" ng-click="client.go('patient.profile-avatar')">
                     <span class="title">头像</span>
-                    <img ng-src="{{customer.Photo==null?'/img/noavatar.jpg':imgPath+customer.Photo}}" />
+                    <div class="item-image">
+                        <img ng-src="{{customer.Photo==null?'img/noavatar.jpg':imgPath+customer.Photo}}" />
+                    </div>
                 </a>
                 <a href="javascript:void(0)" class="item" ng-click="client.go('patient.profile-name')">
                     <span class="title">名字</span>

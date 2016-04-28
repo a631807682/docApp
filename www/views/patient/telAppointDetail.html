@@ -35,7 +35,7 @@
                         <label>付款情况:</label>
                         <label>{{tel.Order.OrderState}}</label>
                     </div>
-                    <button class="button button-positive button-block" ng-if="tel.TelAppointment.TelState=='分配'&&tel.Order.OrderState=='待支付'" ng-click="client.Pay(tel.Order.OrderId)">去支付</button>
+                    <button class="button button-positive button-block" ng-if="tel.TelAppointment.TelState=='分配'&&tel.Order.OrderState=='待支付'" ng-click="client.goPay(tel.Order.OrderId)">去支付</button>
                 </div>
             </div>
         </div>

@@ -28,6 +28,19 @@ var searchDoctorsCtrl = function($scope, config, storage, httpService, $statePar
         return httpService.get(url, data);
     }
 
+    /**
+     * 根据医院/疾病/医生名获取医生
+     * @param  {[type]} name [description]
+     * @return {[type]}      [description]
+     */
+    server.getDoctorsByFuzzy = function(name) {
+
+        var url = config.docApp + "/Doctors/GetDoctorsByFuzzy/";
+        var data = { name: name };
+        return httpService.get(url, data);
+
+    }
+
 
     client.search = function(type) {
 
@@ -45,6 +58,10 @@ var searchDoctorsCtrl = function($scope, config, storage, httpService, $statePar
                 })
                 break;
             case '名称':
+                    server.getDoctorsByFuzzy($scope.name).then(function(response) {
+                    $scope.doctors = response.data.data;
+                    console.log($scope.doctors)
+                })
                 break;
         }
 

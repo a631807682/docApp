@@ -14,7 +14,7 @@
                 <div>付款状态：{{order.OrderState}}</div>
                 <div>订单日期：{{order.CreateTime|date:'yyyy-MM-dd'}}</div>
                 <div ng-if="order.OrderState=='待支付'">
-                    <button class="button button-positive button-block" ng-click="client.Pay(order.OrderId)">去支付</button>
+                    <button class="button button-positive button-block" ng-click="client.goPay(order.OrderId)">去支付</button>
                 </div>
             </a>
         </div>

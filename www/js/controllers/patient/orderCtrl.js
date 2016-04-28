@@ -28,6 +28,14 @@ var orderCtrl = function($scope, config, storage, httpService, $state) {
         $scope.showOrders = showOrders;
     }
 
+    client.goPay = function(orderId) {
+
+        var name = 'patient.orderDetail';
+        var data = {
+            orderId: orderId
+        };
+        $state.go(name, data);
+    }
 
     client.init = function() {
 

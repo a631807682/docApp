@@ -2,7 +2,7 @@
     <ion-content>
         <div class="list card">
             <div class="item item-thumbnail-left item-text-wrap">
-                <img ng-src="{{doctor.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+doctor.CustomerUser.Photo}}" />
+                <img ng-src="{{doctor.CustomerUser.Photo==null?'img/noavatar.jpg':imgPath+doctor.CustomerUser.Photo}}" />
                 <h2>{{doctor.CustomerUser.Name}} {{doctor.Title}}</h2>
                 <p>{{doctor.Hospital.Name}} {{doctor.DiseaseCategory.Name}}</p>
                 <p>擅长: {{doctor.GoodAt|limitTo:100}} </p>
@@ -12,8 +12,8 @@
                 <p>{{doctor.Description}}</p>
             </div>
             <div class="item">
-                <button class="button button-positive button-block">网络咨询</button>
-                <button class="button button-positive button-block">电话咨询</button>
+                <button class="button button-positive button-block" ng-click='client.goMessage()'>网络咨询</button>
+                <button class="button button-positive button-block" ng-click='client.goTels()'>电话咨询</button>
             </div>
         </div>
         <div class="list card">
@@ -39,4 +39,27 @@
             </div>
         </div>
     </ion-content>
+    <script id="case-modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar>
+                <button class="button" ng-click="client.closeCaseModal()">返回</button>
+                <h1 class="title">添加病历</h1>
+                <button class="button" ng-click="client.createCase()">保存</button>
+            </ion-header-bar>
+            <ion-content>
+                <div class="list">
+                    <div class="item item-input">
+                        <input type="text" placeholder="标题" ng-model="params.diseaseCase.Title">
+                    </div>
+                    <div class="item item-input">
+                        <input type="text" placeholder="所患疾病" ng-model="params.diseaseCase.Disease">
+                    </div>
+                    <div class="item item-input">
+                        <textarea type="text" placeholder="请填写疾病描述、曾经治疗情况等" ng-model="params.diseaseCase.Description">
+                        </textarea>
+                    </div>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
 </ion-view>

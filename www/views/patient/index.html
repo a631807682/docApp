@@ -3,7 +3,7 @@
         <div>
             <div class="row">
                 <div class="item-image">
-                    <img ng-src="/img/car-1.jpg">
+                    <img ng-src="img/car-1.jpg">
                 </div>
             </div>
             <div class="list">
@@ -11,7 +11,7 @@
                     网络咨询
                 </div>
                 <a class="item item-avatar" ng-click="client.goMessage(chat.OnlineChatId)" ng-repeat="chat in chats">
-                    <img ng-src="{{chat.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+chat.CustomerUser.Photo}}" />
+                    <img ng-src="{{chat.CustomerUser.Photo==null?'img/noavatar.jpg':imgPath+chat.CustomerUser.Photo}}" />
                     <h2>{{chat.CustomerUser.Name}} </h2>
                     <p>{{chat.OnlineChatItem.CreatedOn| date:"yyyy-MM-dd hh:mm:ss"}}</p>
                 </a>

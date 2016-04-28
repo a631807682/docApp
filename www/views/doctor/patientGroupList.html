@@ -4,7 +4,7 @@
     <ion-content>
         <div class="list card" ng-repeat="patient in patients">
             <div class="item item-avatar" ng-click="client.openGroupModal(patient)">
-                <img ng-src="{{item.Patient.CustomerUser.Photo==null?'/img/noavatar.jpg':imgpath+item.Patient.CustomerUser.Photo}}">
+                <img ng-src="{{item.Patient.CustomerUser.Photo==null?'img/noavatar.jpg':imgpath+item.Patient.CustomerUser.Photo}}">
                 <h2>{{patient.Patient.CustomerUser.Name}} </h2>
                 <p> {{patient.Patient.CustomerUser.Gender}} {{patient.Patient.CustomerUser.Age}}岁</p>
                 <p> {{patient.Patient.CustomerUser.Province}} {{patient.Patient.CustomerUser.City}}</p>

@@ -2,7 +2,7 @@
     <ion-content>
         <div class="list">
             <a href="javascript:void(0)" ng-click="client.goDetail(doctor.DoctorId) " class="item item-avatar" ng-repeat="doctor in myDoctors">
-                <img ng-src="{{doctor.Doctor.CustomerUser.Photo==null?'/img/noavatar.jpg':imgPath+doctor.Doctor.CustomerUser.Photo}}" />
+                <img ng-src="{{doctor.Doctor.CustomerUser.Photo==null?'img/noavatar.jpg':imgPath+doctor.Doctor.CustomerUser.Photo}}" />
                 <h2>{{doctor.Doctor.CustomerUser.Name}}</h2>
                 <p>{{doctor.Doctor.Hospital.Name}}</p>
             </a>
